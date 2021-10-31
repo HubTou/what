@@ -74,3 +74,4 @@ It is available under the [3-clause BSD license](https://opensource.org/licenses
 [Hubert Tournier](https://github.com/HubTou)
 
 This manual page is based on the one written for [FreeBSD](https://www.freebsd.org/).
+

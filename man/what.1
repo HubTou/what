@@ -1,0 +1,146 @@
+.\" Copyright (c) 1980, 1991, 1993
+.\"	The Regents of the University of California.  All rights reserved.
+.\"
+.\" Redistribution and use in source and binary forms, with or without
+.\" modification, are permitted provided that the following conditions
+.\" are met:
+.\" 1. Redistributions of source code must retain the above copyright
+.\"    notice, this list of conditions and the following disclaimer.
+.\" 2. Redistributions in binary form must reproduce the above copyright
+.\"    notice, this list of conditions and the following disclaimer in the
+.\"    documentation and/or other materials provided with the distribution.
+.\" 3. Neither the name of the University nor the names of its contributors
+.\"    may be used to endorse or promote products derived from this software
+.\"    without specific prior written permission.
+.\"
+.\" THIS SOFTWARE IS PROVIDED BY THE REGENTS AND CONTRIBUTORS ``AS IS'' AND
+.\" ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+.\" IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+.\" ARE DISCLAIMED.  IN NO EVENT SHALL THE REGENTS OR CONTRIBUTORS BE LIABLE
+.\" FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+.\" DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+.\" OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+.\" HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+.\" LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+.\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+.\" SUCH DAMAGE.
+.\"
+.\" $FreeBSD$
+.\"
+.Dd October 31, 2021
+.Dt WHAT 1
+.Os
+.Sh NAME
+.Nm what
+.Nd "identify SCCS keyword strings in files"
+.Sh SYNOPSIS
+.Nm
+.Op Fl qs
+.Op Fl -debug
+.Op Fl -help|-?
+.Op Fl -version
+.Op Fl -
+.Op Ar
+.Sh DESCRIPTION
+The
+.Nm
+utility searches each specified
+.Ar file
+for sequences of the form
+.Dq Li @(#)
+as inserted by the
+.Tn SCCS
+source code control system.
+It prints the remainder
+of the string following this marker, up to a NUL character, newline, double
+quote,
+.Ql \&>
+character, or backslash.
+.Ss OPTIONS
+The following options are available:
+.Bl -tag -width indent
+.It Fl q
+Only output the match text, rather than formatting it
+.It Fl s
+Stop searching each file after the first match
+.It Fl -debug
+Enable debug mode
+.Pp
+.It Fl -help|-?
+Print usage and this help message and exit
+.Pp
+.It Fl -version
+Print version and exit
+.Pp
+.It Fl -
+Options processing terminator
+.El
+.Sh ENVIRONMENT
+The
+.Ev WHAT_DEBUG
+environment variable can be set to any value to enable debug mode.
+.Pp
+The
+.Ev FLAVOUR
+or
+.Ev WHAT_FLAVOUR
+environment variables can be set to one of the following values,
+to implement only the corresponding options and behaviours.
+.Bl -bullet
+.It
+posix : POSIX what
+.It
+bsd | bsd:freebsd : FreeBSD what(1)
+.It
+linux : Linux what(1P)
+.El
+.Pp
+However, if the
+.Ev POSIXLY_CORRECT
+environment variable is set to any value, then the POSIX flavour will be selected.
+.Sh EXIT STATUS
+Exit status is 0 if any matches were found, otherwise 1.
+.Sh SEE ALSO
+.Xr ident 1 ,
+.Xr strings 1
+.Sh STANDARDS
+The
+.Nm
+utility is a standard UNIX/POSIX command.
+.Pp
+It conforms to
+.St -p1003.1-2001 .
+The
+.Fl q
+option is a non-standard
+.Fx
+extension which may not be available on other operating systems.
+.Pp
+This re-implementation tries to follow the PEP 8 style guide for Python code.
+.Sh PORTABILITY
+Tested OK under Windows.
+.Sh HISTORY
+The
+.Nm
+command appeared in
+.Ux Programmer's Workbench (PWB/UNIX) 1.0
+in 1977, and was probably written by
+.An Marc J. Rochkind
+along with the rest of the Source Code Control System (SCCS).
+.Pp
+The
+.Bx
+version appeared in
+.Bx 4.0
+in October 1980 and was rewritten because SCCS was not licensed with
+.At 32v .
+.Pp
+This re-implementation was made for the
+.Lk https://github.com/HubTou/PNU PNU project
+.Sh LICENSE
+It is available under the 3-clause BSD license.
+.Sh AUTHORS
+.An Hubert Tournier
+.Pp
+This manual page is based on the one written for
+.Fx .
